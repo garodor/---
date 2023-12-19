@@ -1,17 +1,25 @@
-import javax.swing.*;
-import java.awt.*;
-
+//Ќапишите программу дл€ управлени€ разными типами музыкальных устройств (плееры, колонки, наушники) с использованием паттерна "мост"
 public class Main {
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            JFrame f = new JFrame();
-            f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            f.setTitle("Rotating Cube");
-            f.setResizable(false);
-            f.add(new RotatingCube(), BorderLayout.CENTER);
-            f.pack();
-            f.setLocationRelativeTo(null);
-            f.setVisible(true);
-        });
+        Device musicPlayer = new MusicPlayer();
+        RemoteControl musicPlayerRemoteControl = new MusicDeviceRemoteControl(musicPlayer);
+
+        musicPlayerRemoteControl.powerOn();
+        musicPlayerRemoteControl.setDeviceVolume(50);
+        musicPlayerRemoteControl.powerOff();
+
+        Device speakers = new Speakers();
+        RemoteControl speakersRemoteControl = new MusicDeviceRemoteControl(speakers);
+
+        speakersRemoteControl.powerOn();
+        speakersRemoteControl.setDeviceVolume(70);
+        speakersRemoteControl.powerOff();
+
+        Device headphones = new Headphones();
+        RemoteControl headphonesRemoteControl = new MusicDeviceRemoteControl(headphones);
+
+        headphonesRemoteControl.powerOn();
+        headphonesRemoteControl.setDeviceVolume(30);
+        headphonesRemoteControl.powerOff();
     }
 }
